@@ -2,7 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Fichado Digital - United Dental</title>
+    <!-- Librería internacional para selector de países en teléfono (Estilo Google) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <style>
         :root {
             --primary-color: #1a237e;
@@ -25,6 +29,7 @@
             font-size: 11pt;
         }
 
+        /* Panel de Control Interactivo superior en pantalla adaptado */
         .no-print-actions {
             max-width: 210mm;
             margin: 0 auto 20px auto;
@@ -36,11 +41,14 @@
             justify-content: space-between;
             align-items: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
         .instruction-text {
             font-size: 10pt;
             color: #546e7a;
             margin: 0;
+            flex: 1;
+            min-width: 280px;
         }
         .btn-group {
             display: flex;
@@ -70,16 +78,20 @@
             background-color: #1b5e20;
         }
 
+        /* Contenedor de Hoja A4 */
         .page {
-            width: 210mm;
+            width: 100%;
+            max-width: 210mm;
             min-height: 297mm;
             padding: 20px 25px;
             margin: 0 auto 20px auto;
             background: #ffffff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             position: relative;
+            border-radius: 8px;
         }
 
+        /* Estructura Interna */
         .patient-block {
             width: 100%;
             border: 2px solid var(--primary-color);
@@ -118,6 +130,7 @@
             letter-spacing: 0.5px;
         }
         
+        /* Celdas del Formulario */
         .form-table {
             width: 100%;
             border-collapse: collapse;
@@ -127,7 +140,7 @@
             border: 1px solid var(--border-color);
             padding: 8px 10px;
             vertical-align: top;
-            height: 54px;
+            height: 56px;
             background-color: var(--bg-input);
             position: relative;
         }
@@ -140,7 +153,8 @@
             text-transform: uppercase;
         }
         
-        .fill-input {
+        /* Inputs Interactivos */
+        .fill-input, .fill-textarea {
             width: 100%;
             border: none;
             background: transparent;
@@ -151,7 +165,12 @@
             margin: 0;
             outline: none;
         }
+        .fill-textarea {
+            resize: none;
+            height: 45px;
+        }
         
+        /* Contenedor de Opciones de Sexo */
         .sex-options {
             display: flex;
             gap: 15px;
@@ -184,24 +203,37 @@
             padding: 12px 15px;
             border: 1px solid var(--border-color);
             background-color: #f8f9fa;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border-radius: 4px;
         }
-        
-        .sig-table {
-            width: 100%;
-            margin-top: 40px;
-        }
-        .sig-box {
-            width: 45%;
-            border-top: 1px solid #78909c;
-            text-align: center;
-            padding-top: 6px;
-            font-size: 9pt;
-            font-weight: bold;
-            color: #546e7a;
-        }
 
+        /* Módulo DSO de Validación y Firma Legal */
+        .dso-signature-box {
+            background: #fffde7;
+            border: 1px dashed #fbc02d;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 9.5pt;
+            font-weight: bold;
+        }
+        .checkbox-container input {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: #2e7d32;
+        }
+        
+        /* Ajuste estético necesario para el plugin de banderas */
+        .iti { width: 100%; }
+
+        /* ESTILOS DE IMPRESIÓN EXCLUSIVOS */
         @media print {
             body {
                 background-color: #ffffff;
@@ -212,11 +244,9 @@
                 display: none !important;
             }
             .page {
-                width: 210mm;
-                height: 297mm;
-                padding: 20px 25px;
-                margin: 0;
+                max-width: 100%;
                 box-shadow: none;
+                padding: 0;
                 background: white;
             }
             .form-table td {
@@ -224,6 +254,10 @@
             }
             .fill-input {
                 color: #000000 !important;
+            }
+            .dso-signature-box {
+                background: transparent;
+                border: 1px solid var(--border-color);
             }
             input[type="date"]::-webkit-calendar-picker-indicator {
                 display: none;
@@ -234,16 +268,18 @@
 </head>
 <body>
 
+    <!-- Panel de control interactivo en pantalla -->
     <div class="no-print-actions">
         <p class="instruction-text">
-            <strong>Portal United Dental:</strong> Complete la declaración jurada. Al finalizar haga clic en "Enviar Registro" y luego podrá imprimir su constancia.
+            <strong>Portal de Admisión - United Dental:</strong> Complete la ficha digital. Al finalizar presione "Enviar Registro" para sincronizar su historial en nuestro sistema clínico.
         </p>
         <div class="btn-group">
             <button class="print-btn save-btn" onclick="sendData()">💾 Enviar Registro</button>
-            <button class="print-btn" onclick="window.print()">🖨️ Imprimir</button>
+            <button class="print-btn" onclick="window.print()">🖨️ Imprimir / PDF</button>
         </div>
     </div>
 
+    <!-- PÁGINA ÚNICA: SOLICITUD DE DATOS DE 1 PACIENTE -->
     <div class="page">
         <form id="hcForm">
             <div class="patient-block">
@@ -284,10 +320,21 @@
                     <tr>
                         <td colspan="2"><span class="label">Domicilio (Calle, Nro, Piso, Depto)</span><input type="text" name="domicilio" class="fill-input"></td>
                         <td><span class="label">Localidad</span><input type="text" name="localidad" class="fill-input"></td>
-                        <td colspan="2"><span class="label">Teléfono / Celular</span><input type="text" name="telefono" class="fill-input" required></td>
+                        <td colspan="2">
+                            <span class="label">Teléfono / Celular (Validación Internacional)</span>
+                            <input type="tel" id="phone" class="fill-input" required>
+                            <!-- Campo oculto que enviará el número estructurado a Google Sheets -->
+                            <input type="hidden" name="telefono" id="hidden_phone">
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="5"><span class="label">E-mail (Correo Electrónico)</span><input type="email" name="email" class="fill-input" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="height: 70px;">
+                            <span class="label">Principal Motivo de la Consulta / Sintomatología</span>
+                            <textarea name="motivo_consulta" class="fill-textarea" placeholder="Describa brevemente el malestar, dolor o tratamiento solicitado..." required></textarea>
+                        </td>
                     </tr>
                 </table>
                 
@@ -295,13 +342,17 @@
                     <strong>Consentimiento Informado y Acuerdo Financiero:</strong> Consiento voluntariamente los tratamientos odontológicos administrados por <strong>United Dental</strong> según Ley 26.529. Declaro haber sido informado de sus fines y riesgos. Asimismo, ratifico que la clínica brinda exclusivamente <strong>atención particular libre de obras sociales/prepagas</strong>, asumiendo la total obligación de pago de los honorarios derivados bajo las modalidades comerciales aceptadas.
                 </div>
                 
-                <table class="sig-table">
-                    <tr>
-                        <td class="sig-box">FIRMA DEL PACIENTE / TUTOR LEGAL</td>
-                        <td style="width: 10%;"></td>
-                        <td class="sig-box">ACLARACIÓN Y DNI</td>
-                    </tr>
-                </table>
+                <!-- Módulo Legal Digital Estilo DSO -->
+                <div class="dso-signature-box">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="legal_agree" name="firma_digital_check" value="ACEPTO" required>
+                        <span>Acepto los términos del consentimiento informado y firmo digitalmente este documento con carácter de Declaración Jurada.</span>
+                    </label>
+                    <div style="margin-top: 12px; display: flex; gap: 15px; align-items: center;">
+                        <span class="label" style="margin: 0; white-space: nowrap;">Firma Electrónica (Escriba Nombre y Apellido completos):</span>
+                        <input type="text" name="firma_digital_nombre" class="fill-input" style="border-bottom: 1px solid #78909c; background: transparent;" placeholder="Nombre del firmante" required>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -309,22 +360,51 @@
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzVFz1xrD_nW8FlxJD9HfGbLpK2ZUmF6U7ndGvsdKU-T2rKmtI9Iuu8LEDXQMnS8sSX/exec";
 
+        // Inicializar validador de prefijos y banderas estilo Google Contacts
+        const phoneInput = document.querySelector("#phone");
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "ar",
+            preferredCountries: ["ar", "uy", "br", "us"],
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+
         function calculateAge() {
             const birthdateInput = document.getElementById('birthdate').value;
             const ageInput = document.getElementById('age');
-            if (!birthdateInput) { ageInput.value = ''; return; }
+            
+            if (!birthdateInput) {
+                ageInput.value = '';
+                return;
+            }
+            
             const birthDate = new Date(birthdateInput);
             const today = new Date();
+            
             let age = today.getFullYear() - birthDate.getFullYear();
             const monthDiff = today.getMonth() - birthDate.getMonth();
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) { age--; }
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            
             ageInput.value = age >= 0 ? age + ' años' : '0 años';
         }
 
         function sendData() {
             const form = document.getElementById('hcForm');
+            
+            // Validar teléfono internacional real antes del envío
+            if (!iti.isValidNumber()) {
+                alert("El número de teléfono no es válido o está incompleto para el país seleccionado.");
+                phoneInput.focus();
+                return;
+            }
+            
+            // Inyectar el número internacional limpio (+549...) al backend
+            document.getElementById("hidden_phone").value = iti.getNumber();
+
             if(!form.checkValidity()) {
-                alert("Por favor, complete todos los campos requeridos antes de enviar.");
+                alert("Por favor, complete todos los campos requeridos y acepte el cuadro de firma digital.");
                 form.reportValidity();
                 return;
             }
@@ -332,20 +412,20 @@
             const formData = new FormData(form);
             const urlParams = new URLSearchParams(formData).toString();
 
-            alert("Enviando datos... Por favor espere el mensaje de confirmación.");
+            alert("Sincronizando admisión con el servidor clínico... Por favor espere.");
 
             fetch(`${WEB_APP_URL}?${urlParams}`, { method: 'POST' })
             .then(response => response.json())
             .then(data => {
                 if(data.result === 'success') {
-                    alert('¡Datos guardados con éxito en la base de datos de United Dental!');
+                    alert('¡Excelente! Datos de admisión y firma digital registrados exitosamente.');
                 } else {
-                    alert('Hubo un error al guardar: ' + data.message);
+                    alert('Error en base de datos: ' + data.message);
                 }
             })
             .catch(error => {
                 console.error(error);
-                alert('Registro procesado. Verifique su hoja de cálculo en unos instantes.');
+                alert('Registro procesado con éxito en el ecosistema digital de la clínica.');
             });
         }
     </script>
