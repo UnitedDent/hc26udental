@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Fichado Digital - United Dental</title>
+    <title>UDental</title>
     <!-- Librería internacional para selector de países en teléfono (Estilo Google) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
@@ -28,52 +28,6 @@
             padding: 10px;
             font-size: 11pt;
         }
-
-        /* Panel de Control Responsivo en Pantalla */
-        .no-print-actions {
-            max-width: 1000px;
-            margin: 0 auto 15px auto;
-            background: #ffffff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .instruction-text {
-            font-size: 9.5pt;
-            color: #546e7a;
-            margin: 0;
-            flex: 1;
-            min-width: 250px;
-        }
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-        }
-        .print-btn {
-            flex: 1;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 10pt;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .print-btn:hover { background-color: #0d1b60; }
-        .save-btn { background-color: #2e7d32; }
-        .save-btn:hover { background-color: #1b5e20; }
 
         /* Contenedor Fluido de Ficha en Pantalla */
         .page {
@@ -104,8 +58,9 @@
             gap: 10px;
         }
         .clinic-title-large {
-            font-size: 20pt;
-            font-weight: bold;
+            font-size: 24pt;
+            font-weight: 800;
+            letter-spacing: 1px;
             color: var(--primary-color);
             text-align: center;
         }
@@ -161,6 +116,12 @@
             font-family: inherit;
             outline: none;
             padding: 2px 0;
+        }
+        select.fill-input {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
         }
         .fill-textarea {
             resize: none;
@@ -231,6 +192,32 @@
             flex-direction: column;
             gap: 8px;
         }
+
+        /* Botones en la parte inferior derecha */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            font-size: 10pt;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .action-btn:hover { opacity: 0.9; }
+        .send-btn { background-color: var(--accent-color); }
         
         .iti { width: 100%; }
 
@@ -239,8 +226,6 @@
             body { padding: 20px; }
             .page { padding: 25px; }
             .patient-block { padding: 20px; }
-            .btn-group { width: auto; }
-            .print-btn { flex: initial; }
             
             .header-dso {
                 flex-direction: row;
@@ -279,7 +264,7 @@
                 margin: 0; 
                 font-size: 10pt; 
             }
-            .no-print-actions { display: none !important; }
+            .form-actions { display: none !important; }
             .page { 
                 max-width: 100%; 
                 width: 100%;
@@ -289,7 +274,6 @@
                 background: white; 
             }
             
-            /* Fuerza el reordenamiento a grilla horizontal perfecta en papel */
             .form-grid { 
                 display: grid !important;
                 grid-template-columns: repeat(20, 1fr) !important; 
@@ -324,16 +308,6 @@
 </head>
 <body>
 
-    <div class="no-print-actions">
-        <p class="instruction-text">
-            <strong>Portal de Admisión - United Dental:</strong> Complete la ficha digital. Al finalizar presione "Enviar Registro" para sincronizar su historial en nuestro sistema clínico.
-        </p>
-        <div class="btn-group">
-            <button class="print-btn save-btn" onclick="sendData()">💾 Enviar Registro</button>
-            <button class="print-btn" onclick="window.print()">🖨️ Imprimir / PDF</button>
-        </div>
-    </div>
-
     <div class="page">
         <form id="hcForm">
             <div class="patient-block">
@@ -345,7 +319,7 @@
                     </div>
                 </div>
                 
-                <div class="title-banner">Historia Clínica - Ficha de Ingreso</div>
+                <div class="title-banner">Historia Clinica</div>
                 
                 <div class="form-grid">
                     <div class="form-cell c-8"><span class="label">Apellidos</span><input type="text" name="apellidos" class="fill-input" required></div>
@@ -362,13 +336,29 @@
                             <label class="sex-label"><input type="radio" name="sexo" value="X"> X</label>
                         </div>
                     </div>
-                    <div class="form-cell c-4"><span class="label">Nacionalidad</span><input type="text" name="nacionalidad" class="fill-input"></div>
+                    <div class="form-cell c-4">
+                        <span class="label">Nacionalidad</span>
+                        <select name="nacionalidad" class="fill-input" required>
+                            <option value="" disabled selected>Seleccione...</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Uruguay">Uruguay</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Brasil">Brasil</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="Bolivia">Bolivia</option>
+                            <option value="Peru">Perú</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Espana">España</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
                     <div class="form-cell c-4"><span class="label">Ocupación</span><input type="text" name="ocupacion" class="fill-input"></div>
                     
                     <div class="form-cell c-10"><span class="label">Domicilio (Calle, Nro, Piso, Depto)</span><input type="text" name="domicilio" class="fill-input"></div>
                     <div class="form-cell c-4"><span class="label">Localidad</span><input type="text" name="localidad" class="fill-input"></div>
                     <div class="form-cell c-6">
-                        <span class="label">Teléfono / Celular (Validación Internacional)</span>
+                        <span class="label">Telefono</span>
                         <input type="tel" id="phone" class="fill-input" required>
                         <input type="hidden" name="telefono" id="hidden_phone">
                     </div>
@@ -394,6 +384,12 @@
                         <span class="label" style="margin: 0; white-space: nowrap;">Firma Electrónica (Escriba Nombre y Apellido completos):</span>
                         <input type="text" name="firma_digital_nombre" class="fill-input" style="border-bottom: 1px solid #78909c; background: transparent; max-width: 350px;" placeholder="Nombre del firmante" required>
                     </div>
+                </div>
+
+                <!-- Botones al pie, alineados a la derecha -->
+                <div class="form-actions">
+                    <button type="button" class="action-btn" onclick="window.print()">Imprimir</button>
+                    <button type="button" class="action-btn send-btn" onclick="sendData()">Enviar</button>
                 </div>
             </div>
         </form>
@@ -457,6 +453,9 @@
                 alert('Registro procesado con éxito en el ecosistema digital de la clínica.');
             });
         }
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
