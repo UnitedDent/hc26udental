@@ -25,14 +25,14 @@
             color: var(--text-color);
             background-color: #f0f2f5;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             font-size: 11pt;
         }
 
-        /* Panel de Control Interactivo superior en pantalla adaptado */
+        /* Panel de Control Responsivo en Pantalla */
         .no-print-actions {
-            max-width: 210mm;
-            margin: 0 auto 20px auto;
+            max-width: 1000px;
+            margin: 0 auto 15px auto;
             background: #ffffff;
             padding: 15px;
             border-radius: 8px;
@@ -44,78 +44,73 @@
             flex-wrap: wrap;
         }
         .instruction-text {
-            font-size: 10pt;
+            font-size: 9.5pt;
             color: #546e7a;
             margin: 0;
             flex: 1;
-            min-width: 280px;
+            min-width: 250px;
         }
         .btn-group {
             display: flex;
             gap: 10px;
+            width: 100%;
         }
         .print-btn {
+            flex: 1;
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             font-size: 10pt;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             transition: background 0.2s;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
         }
-        .print-btn:hover {
-            background-color: #0d1b60;
-        }
-        .save-btn {
-            background-color: #2e7d32;
-        }
-        .save-btn:hover {
-            background-color: #1b5e20;
-        }
+        .print-btn:hover { background-color: #0d1b60; }
+        .save-btn { background-color: #2e7d32; }
+        .save-btn:hover { background-color: #1b5e20; }
 
-        /* Contenedor de Hoja A4 */
+        /* Contenedor Fluido de Ficha en Pantalla */
         .page {
             width: 100%;
-            max-width: 210mm;
-            min-height: 297mm;
-            padding: 20px 25px;
+            max-width: 1000px;
             margin: 0 auto 20px auto;
             background: #ffffff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            position: relative;
             border-radius: 8px;
+            padding: 15px;
         }
 
-        /* Estructura Interna */
         .patient-block {
             width: 100%;
             border: 2px solid var(--primary-color);
             border-radius: 8px;
-            padding: 20px;
+            padding: 15px;
             background-color: #ffffff;
         }
         
-        .header-table {
-            width: 100%;
+        /* Cabecera Responsiva */
+        .header-dso {
+            display: flex;
+            flex-direction: column;
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 12px;
             margin-bottom: 20px;
-        }
-        .header-table td {
-            vertical-align: middle;
+            gap: 10px;
         }
         .clinic-title-large {
             font-size: 20pt;
             font-weight: bold;
             color: var(--primary-color);
+            text-align: center;
         }
         .clinic-info {
-            text-align: right;
+            text-align: center;
             font-size: 9.5pt;
             color: var(--primary-color);
             line-height: 1.4;
@@ -123,37 +118,40 @@
         .title-banner {
             text-align: center;
             color: var(--primary-color);
-            font-size: 14pt;
+            font-size: 13pt;
             margin: 10px 0 20px 0;
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 0.5px;
         }
         
-        /* Celdas del Formulario */
-        .form-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        .form-table td {
+        /* Grid de Formulario Móvil por Defecto */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1px;
+            background-color: var(--border-color);
             border: 1px solid var(--border-color);
-            padding: 8px 10px;
-            vertical-align: top;
-            height: 56px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .form-cell {
+            padding: 8px 12px;
             background-color: var(--bg-input);
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 60px;
         }
         .label {
             font-size: 8pt;
             font-weight: bold;
             color: #546e7a;
-            display: block;
             margin-bottom: 4px;
             text-transform: uppercase;
         }
         
-        /* Inputs Interactivos */
         .fill-input, .fill-textarea {
             width: 100%;
             border: none;
@@ -161,20 +159,18 @@
             font-size: 11pt;
             color: #000000;
             font-family: inherit;
-            padding: 2px 0 0 0;
-            margin: 0;
             outline: none;
+            padding: 2px 0;
         }
         .fill-textarea {
             resize: none;
-            height: 45px;
+            height: 50px;
         }
         
-        /* Contenedor de Opciones de Sexo */
         .sex-options {
             display: flex;
             gap: 15px;
-            margin-top: 5px;
+            margin-top: 2px;
         }
         .sex-label {
             display: flex;
@@ -187,11 +183,10 @@
             margin-right: 5px;
             width: 16px;
             height: 16px;
-            cursor: pointer;
             accent-color: var(--primary-color);
         }
         
-        .form-table td:focus-within {
+        .form-cell:focus-within {
             background-color: #ffffff;
             box-shadow: inset 0 0 0 1px var(--primary-color);
         }
@@ -207,7 +202,7 @@
             border-radius: 4px;
         }
 
-        /* Módulo DSO de Validación y Firma Legal */
+        /* Módulo de Firma Digital */
         .dso-signature-box {
             background: #fffde7;
             border: 1px dashed #fbc02d;
@@ -227,48 +222,108 @@
             width: 18px;
             height: 18px;
             margin-top: 2px;
+            flex-shrink: 0;
             accent-color: #2e7d32;
         }
+        .signature-input-group {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
         
-        /* Ajuste estético necesario para el plugin de banderas */
         .iti { width: 100%; }
 
-        /* ESTILOS DE IMPRESIÓN EXCLUSIVOS */
+        /* Media Query para Escritorios y Laptops */
+        @media (min-width: 768px) {
+            body { padding: 20px; }
+            .page { padding: 25px; }
+            .patient-block { padding: 20px; }
+            .btn-group { width: auto; }
+            .print-btn { flex: initial; }
+            
+            .header-dso {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .clinic-title-large { text-align: left; }
+            .clinic-info { text-align: right; }
+
+            .form-grid {
+                grid-template-columns: repeat(20, 1fr);
+            }
+            .c-8  { grid-column: span 8; }
+            .c-4  { grid-column: span 4; }
+            .c-5  { grid-column: span 5; }
+            .c-3  { grid-column: span 3; }
+            .c-6  { grid-column: span 6; }
+            .c-10 { grid-column: span 10; }
+            .c-20 { grid-column: span 20; }
+            
+            .signature-input-group {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        /* ESTILOS DE IMPRESIÓN EXCLUSIVOS: BLINDAJE EN HOJA A4 ÚNICA */
         @media print {
-            body {
-                background-color: #ffffff;
-                padding: 0;
+            @page {
+                size: A4;
+                margin: 10mm 15mm;
+            }
+            body { 
+                background-color: #ffffff; 
+                padding: 0; 
+                margin: 0; 
+                font-size: 10pt; 
+            }
+            .no-print-actions { display: none !important; }
+            .page { 
+                max-width: 100%; 
+                width: 100%;
+                box-shadow: none; 
+                padding: 0; 
                 margin: 0;
+                background: white; 
             }
-            .no-print-actions {
-                display: none !important;
+            
+            /* Fuerza el reordenamiento a grilla horizontal perfecta en papel */
+            .form-grid { 
+                display: grid !important;
+                grid-template-columns: repeat(20, 1fr) !important; 
+                gap: 1px; 
+                background-color: var(--border-color); 
             }
-            .page {
-                max-width: 100%;
-                box-shadow: none;
-                padding: 0;
-                background: white;
+            .c-8  { grid-column: span 8 !important; } 
+            .c-4  { grid-column: span 4 !important; } 
+            .c-5  { grid-column: span 5 !important; }
+            .c-3  { grid-column: span 3 !important; } 
+            .c-6  { grid-column: span 6 !important; } 
+            .c-10 { grid-column: span 10 !important; } 
+            .c-20 { grid-column: span 20 !important; }
+            
+            .form-cell { 
+                background-color: transparent !important; 
+                min-height: 50px; 
+                padding: 6px 10px;
             }
-            .form-table td {
-                background-color: transparent !important;
-            }
-            .fill-input {
-                color: #000000 !important;
-            }
-            .dso-signature-box {
-                background: transparent;
-                border: 1px solid var(--border-color);
-            }
-            input[type="date"]::-webkit-calendar-picker-indicator {
-                display: none;
-                -webkit-appearance: none;
-            }
+            .fill-input { color: #000000 !important; }
+            .fill-textarea { height: 40px; }
+            .dso-signature-box { background: transparent; border: 1px solid var(--border-color); }
+            
+            .header-dso { display: flex !important; flex-direction: row !important; justify-content: space-between !important; }
+            .clinic-title-large { text-align: left !important; }
+            .clinic-info { text-align: right !important; }
+            .signature-input-group { display: flex !important; flex-direction: row !important; }
+            
+            input[type="date"]::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Panel de control interactivo en pantalla -->
     <div class="no-print-actions">
         <p class="instruction-text">
             <strong>Portal de Admisión - United Dental:</strong> Complete la ficha digital. Al finalizar presione "Enviar Registro" para sincronizar su historial en nuestro sistema clínico.
@@ -279,78 +334,65 @@
         </div>
     </div>
 
-    <!-- PÁGINA ÚNICA: SOLICITUD DE DATOS DE 1 PACIENTE -->
     <div class="page">
         <form id="hcForm">
             <div class="patient-block">
-                <table class="header-table">
-                    <tr>
-                        <td style="width: 45%;" class="clinic-title-large">
-                            <strong>United Dental</strong>
-                        </td>
-                        <td style="width: 55%;" class="clinic-info">
-                            Jason 1091 Local 7, Pinamar, BA 7167 | Tel: 02254 48 1005<br>
-                            united.dental@email.com | <strong>Atención Exclusiva Particular</strong>
-                        </td>
-                    </tr>
-                </table>
+                <div class="header-dso">
+                    <div class="clinic-title-large">United Dental</div>
+                    <div class="clinic-info">
+                        Jason 1091 Local 7, Pinamar, BA 7167 | Tel: 02254 48 1005<br>
+                        united.dental@email.com | <strong>Atención Exclusiva Particular</strong>
+                    </div>
+                </div>
                 
                 <div class="title-banner">Historia Clínica - Ficha de Ingreso</div>
                 
-                <table class="form-table">
-                    <tr>
-                        <td colspan="2" style="width: 40%;"><span class="label">Apellidos</span><input type="text" name="apellidos" class="fill-input" required></td>
-                        <td colspan="2" style="width: 40%;"><span class="label">Nombres</span><input type="text" name="nombres" class="fill-input" required></td>
-                        <td style="width: 20%;"><span class="label">DNI / Pasaporte</span><input type="text" name="dni" class="fill-input" required></td>
-                    </tr>
-                    <tr>
-                        <td style="width: 22%;"><span class="label">Fecha de Nac.</span><input type="date" id="birthdate" name="birthdate" class="fill-input" onchange="calculateAge()" required></td>
-                        <td style="width: 13%;"><span class="label">Edad</span><input type="text" id="age" name="age" class="fill-input" readonly placeholder="Auto"></td>
-                        <td style="width: 25%;">
-                            <span class="label">Sexo</span>
-                            <div class="sex-options">
-                                <label class="sex-label"><input type="radio" name="sexo" value="F" required> F</label>
-                                <label class="sex-label"><input type="radio" name="sexo" value="M"> M</label>
-                                <label class="sex-label"><input type="radio" name="sexo" value="X"> X</label>
-                            </div>
-                        </td>
-                        <td style="width: 20%;"><span class="label">Nacionalidad</span><input type="text" name="nacionalidad" class="fill-input"></td>
-                        <td style="width: 20%;"><span class="label">Ocupación</span><input type="text" name="ocupacion" class="fill-input"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><span class="label">Domicilio (Calle, Nro, Piso, Depto)</span><input type="text" name="domicilio" class="fill-input"></td>
-                        <td><span class="label">Localidad</span><input type="text" name="localidad" class="fill-input"></td>
-                        <td colspan="2">
-                            <span class="label">Teléfono / Celular (Validación Internacional)</span>
-                            <input type="tel" id="phone" class="fill-input" required>
-                            <!-- Campo oculto que enviará el número estructurado a Google Sheets -->
-                            <input type="hidden" name="telefono" id="hidden_phone">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><span class="label">E-mail (Correo Electrónico)</span><input type="email" name="email" class="fill-input" required></td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" style="height: 70px;">
-                            <span class="label">Principal Motivo de la Consulta / Sintomatología</span>
-                            <textarea name="motivo_consulta" class="fill-textarea" placeholder="Describa brevemente el malestar, dolor o tratamiento solicitado..." required></textarea>
-                        </td>
-                    </tr>
-                </table>
+                <div class="form-grid">
+                    <div class="form-cell c-8"><span class="label">Apellidos</span><input type="text" name="apellidos" class="fill-input" required></div>
+                    <div class="form-cell c-8"><span class="label">Nombres</span><input type="text" name="nombres" class="fill-input" required></div>
+                    <div class="form-cell c-4"><span class="label">DNI / Pasaporte</span><input type="text" name="dni" class="fill-input" required></div>
+                    
+                    <div class="form-cell c-5"><span class="label">Fecha de Nac.</span><input type="date" id="birthdate" name="birthdate" class="fill-input" onchange="calculateAge()" required></div>
+                    <div class="form-cell c-3"><span class="label">Edad</span><input type="text" id="age" name="age" class="fill-input" readonly placeholder="Auto"></div>
+                    <div class="form-cell c-4">
+                        <span class="label">Sexo</span>
+                        <div class="sex-options">
+                            <label class="sex-label"><input type="radio" name="sexo" value="F" required> F</label>
+                            <label class="sex-label"><input type="radio" name="sexo" value="M"> M</label>
+                            <label class="sex-label"><input type="radio" name="sexo" value="X"> X</label>
+                        </div>
+                    </div>
+                    <div class="form-cell c-4"><span class="label">Nacionalidad</span><input type="text" name="nacionalidad" class="fill-input"></div>
+                    <div class="form-cell c-4"><span class="label">Ocupación</span><input type="text" name="ocupacion" class="fill-input"></div>
+                    
+                    <div class="form-cell c-10"><span class="label">Domicilio (Calle, Nro, Piso, Depto)</span><input type="text" name="domicilio" class="fill-input"></div>
+                    <div class="form-cell c-4"><span class="label">Localidad</span><input type="text" name="localidad" class="fill-input"></div>
+                    <div class="form-cell c-6">
+                        <span class="label">Teléfono / Celular (Validación Internacional)</span>
+                        <input type="tel" id="phone" class="fill-input" required>
+                        <input type="hidden" name="telefono" id="hidden_phone">
+                    </div>
+                    
+                    <div class="form-cell c-20"><span class="label">E-mail (Correo Electrónico)</span><input type="email" name="email" class="fill-input" required></div>
+                    
+                    <div class="form-cell c-20" style="min-height: 85px;">
+                        <span class="label">Principal Motivo de la Consulta / Sintomatología</span>
+                        <textarea name="motivo_consulta" class="fill-textarea" placeholder="Describa brevemente el malestar, dolor o tratamiento solicitado..." required></textarea>
+                    </div>
+                </div>
                 
                 <div class="consent-mini">
                     <strong>Consentimiento Informado y Acuerdo Financiero:</strong> Consiento voluntariamente los tratamientos odontológicos administrados por <strong>United Dental</strong> según Ley 26.529. Declaro haber sido informado de sus fines y riesgos. Asimismo, ratifico que la clínica brinda exclusivamente <strong>atención particular libre de obras sociales/prepagas</strong>, asumiendo la total obligación de pago de los honorarios derivados bajo las modalidades comerciales aceptadas.
                 </div>
                 
-                <!-- Módulo Legal Digital Estilo DSO -->
                 <div class="dso-signature-box">
                     <label class="checkbox-container">
                         <input type="checkbox" id="legal_agree" name="firma_digital_check" value="ACEPTO" required>
                         <span>Acepto los términos del consentimiento informado y firmo digitalmente este documento con carácter de Declaración Jurada.</span>
                     </label>
-                    <div style="margin-top: 12px; display: flex; gap: 15px; align-items: center;">
+                    <div class="signature-input-group">
                         <span class="label" style="margin: 0; white-space: nowrap;">Firma Electrónica (Escriba Nombre y Apellido completos):</span>
-                        <input type="text" name="firma_digital_nombre" class="fill-input" style="border-bottom: 1px solid #78909c; background: transparent;" placeholder="Nombre del firmante" required>
+                        <input type="text" name="firma_digital_nombre" class="fill-input" style="border-bottom: 1px solid #78909c; background: transparent; max-width: 350px;" placeholder="Nombre del firmante" required>
                     </div>
                 </div>
             </div>
@@ -360,7 +402,6 @@
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzVFz1xrD_nW8FlxJD9HfGbLpK2ZUmF6U7ndGvsdKU-T2rKmtI9Iuu8LEDXQMnS8sSX/exec";
 
-        // Inicializar validador de prefijos y banderas estilo Google Contacts
         const phoneInput = document.querySelector("#phone");
         const iti = window.intlTelInput(phoneInput, {
             initialCountry: "ar",
@@ -371,36 +412,24 @@
         function calculateAge() {
             const birthdateInput = document.getElementById('birthdate').value;
             const ageInput = document.getElementById('age');
-            
-            if (!birthdateInput) {
-                ageInput.value = '';
-                return;
-            }
-            
+            if (!birthdateInput) { ageInput.value = ''; return; }
             const birthDate = new Date(birthdateInput);
             const today = new Date();
-            
             let age = today.getFullYear() - birthDate.getFullYear();
             const monthDiff = today.getMonth() - birthDate.getMonth();
-            
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
-            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) { age--; }
             ageInput.value = age >= 0 ? age + ' años' : '0 años';
         }
 
         function sendData() {
             const form = document.getElementById('hcForm');
             
-            // Validar teléfono internacional real antes del envío
             if (!iti.isValidNumber()) {
                 alert("El número de teléfono no es válido o está incompleto para el país seleccionado.");
                 phoneInput.focus();
                 return;
             }
             
-            // Inyectar el número internacional limpio (+549...) al backend
             document.getElementById("hidden_phone").value = iti.getNumber();
 
             if(!form.checkValidity()) {
