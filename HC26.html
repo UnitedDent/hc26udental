@@ -25,7 +25,6 @@
             font-size: 11pt;
         }
 
-        /* Panel de Control Interactivo superior en pantalla */
         .no-print-actions {
             max-width: 210mm;
             margin: 0 auto 20px auto;
@@ -36,11 +35,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 15px;
         }
         .instruction-text {
             font-size: 10pt;
             color: #546e7a;
             margin: 0;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
         }
         .print-btn {
             background-color: var(--primary-color);
@@ -59,8 +63,13 @@
         .print-btn:hover {
             background-color: #0d1b60;
         }
+        .save-btn {
+            background-color: #2e7d32;
+        }
+        .save-btn:hover {
+            background-color: #1b5e20;
+        }
 
-        /* Contenedor de Hoja A4 */
         .page {
             width: 210mm;
             min-height: 297mm;
@@ -71,7 +80,6 @@
             position: relative;
         }
 
-        /* Estructura Interna */
         .patient-block {
             width: 100%;
             border: 2px solid var(--primary-color);
@@ -110,7 +118,6 @@
             letter-spacing: 0.5px;
         }
         
-        /* Celdas del Formulario */
         .form-table {
             width: 100%;
             border-collapse: collapse;
@@ -133,7 +140,6 @@
             text-transform: uppercase;
         }
         
-        /* Inputs Interactivos */
         .fill-input {
             width: 100%;
             border: none;
@@ -146,7 +152,6 @@
             outline: none;
         }
         
-        /* Contenedor de Opciones de Sexo */
         .sex-options {
             display: flex;
             gap: 15px;
@@ -197,7 +202,6 @@
             color: #546e7a;
         }
 
-        /* ESTILOS DE IMPRESIÓN EXCLUSIVOS */
         @media print {
             body {
                 background-color: #ffffff;
@@ -221,7 +225,6 @@
             .fill-input {
                 color: #000000 !important;
             }
-            /* Ocultar flechas nativas del input date en impresión si aplica */
             input[type="date"]::-webkit-calendar-picker-indicator {
                 display: none;
                 -webkit-appearance: none;
@@ -231,98 +234,119 @@
 </head>
 <body>
 
-    <!-- Panel de control interactivo en pantalla -->
     <div class="no-print-actions">
         <p class="instruction-text">
-            <strong>Modo Inteligente - United Dental:</strong> Seleccione la fecha de nacimiento para el cálculo automático de edad y marque la casilla de sexo con un clic.
+            <strong>Portal United Dental:</strong> Complete la declaración jurada. Al finalizar haga clic en "Enviar Registro" y luego podrá imprimir su constancia.
         </p>
-        <button class="print-btn" onclick="window.print()">
-            🖨️ Imprimir / Guardar PDF
-        </button>
-    </div>
-
-    <!-- PÁGINA ÚNICA: SOLICITUD DE DATOS DE 1 PACIENTE -->
-    <div class="page">
-        <div class="patient-block">
-            <table class="header-table">
-                <tr>
-                    <td style="width: 45%;" class="clinic-title-large">
-                        <strong>United Dental</strong>
-                    </td>
-                    <td style="width: 55%;" class="clinic-info">
-                        Jason 1091 Local 7, Pinamar, BA 7167 | Tel: 02254 48 1005<br>
-                        united.dental@email.com | <strong>Atención Exclusiva Particular</strong>
-                    </td>
-                </tr>
-            </table>
-            
-            <div class="title-banner">Historia Clínica - Ficha de Ingreso</div>
-            
-            <table class="form-table">
-                <tr>
-                    <td colspan="2" style="width: 40%;"><span class="label">Apellidos</span><input type="text" class="fill-input"></td>
-                    <td colspan="2" style="width: 40%;"><span class="label">Nombres</span><input type="text" class="fill-input"></td>
-                    <td style="width: 20%;"><span class="label">DNI / Pasaporte</span><input type="text" class="fill-input"></td>
-                </tr>
-                <tr>
-                    <td style="width: 22%;"><span class="label">Fecha de Nac.</span><input type="date" id="birthdate" class="fill-input" onchange="calculateAge()"></td>
-                    <td style="width: 13%;"><span class="label">Edad</span><input type="text" id="age" class="fill-input" readonly placeholder="Auto"></td>
-                    <td style="width: 25%;">
-                        <span class="label">Sexo</span>
-                        <div class="sex-options">
-                            <label class="sex-label"><input type="radio" name="sexo" value="F"> F</label>
-                            <label class="sex-label"><input type="radio" name="sexo" value="M"> M</label>
-                            <label class="sex-label"><input type="radio" name="sexo" value="X"> X</label>
-                        </div>
-                    </td>
-                    <td style="width: 20%;"><span class="label">Nacionalidad</span><input type="text" class="fill-input"></td>
-                    <td style="width: 20%;"><span class="label">Ocupación</span><input type="text" class="fill-input"></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><span class="label">Domicilio (Calle, Nro, Piso, Depto)</span><input type="text" class="fill-input"></td>
-                    <td><span class="label">Localidad</span><input type="text" class="fill-input"></td>
-                    <td colspan="2"><span class="label">Teléfono / Celular</span><input type="text" class="fill-input"></td>
-                </tr>
-                <tr>
-                    <td colspan="5"><span class="label">E-mail (Correo Electrónico)</span><input type="email" class="fill-input"></td>
-                </tr>
-            </table>
-            
-            <div class="consent-mini">
-                <strong>Consentimiento Informado y Acuerdo Financiero:</strong> Consiento voluntariamente los tratamientos odontológicos administrados por <strong>United Dental</strong> según Ley 26.529. Declaro haber sido informado de sus fines y riesgos. Asimismo, ratifico que la clínica brinda exclusivamente <strong>atención particular libre de obras sociales/prepagas</strong>, asumiendo la total obligación de pago de los honorarios derivados bajo las modalidades comerciales aceptadas.
-            </div>
-            
-            <table class="sig-table">
-                <tr>
-                    <td class="sig-box">FIRMA DEL PACIENTE / TUTOR LEGAL</td>
-                    <td style="width: 10%;"></td>
-                    <td class="sig-box">ACLARACIÓN Y DNI</td>
-                </tr>
-            </table>
+        <div class="btn-group">
+            <button class="print-btn save-btn" onclick="sendData()">💾 Enviar Registro</button>
+            <button class="print-btn" onclick="window.print()">🖨️ Imprimir</button>
         </div>
     </div>
 
+    <div class="page">
+        <form id="hcForm">
+            <div class="patient-block">
+                <table class="header-table">
+                    <tr>
+                        <td style="width: 45%;" class="clinic-title-large">
+                            <strong>United Dental</strong>
+                        </td>
+                        <td style="width: 55%;" class="clinic-info">
+                            Jason 1091 Local 7, Pinamar, BA 7167 | Tel: 02254 48 1005<br>
+                            united.dental@email.com | <strong>Atención Exclusiva Particular</strong>
+                        </td>
+                    </tr>
+                </table>
+                
+                <div class="title-banner">Historia Clínica - Ficha de Ingreso</div>
+                
+                <table class="form-table">
+                    <tr>
+                        <td colspan="2" style="width: 40%;"><span class="label">Apellidos</span><input type="text" name="apellidos" class="fill-input" required></td>
+                        <td colspan="2" style="width: 40%;"><span class="label">Nombres</span><input type="text" name="nombres" class="fill-input" required></td>
+                        <td style="width: 20%;"><span class="label">DNI / Pasaporte</span><input type="text" name="dni" class="fill-input" required></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 22%;"><span class="label">Fecha de Nac.</span><input type="date" id="birthdate" name="birthdate" class="fill-input" onchange="calculateAge()" required></td>
+                        <td style="width: 13%;"><span class="label">Edad</span><input type="text" id="age" name="age" class="fill-input" readonly placeholder="Auto"></td>
+                        <td style="width: 25%;">
+                            <span class="label">Sexo</span>
+                            <div class="sex-options">
+                                <label class="sex-label"><input type="radio" name="sexo" value="F" required> F</label>
+                                <label class="sex-label"><input type="radio" name="sexo" value="M"> M</label>
+                                <label class="sex-label"><input type="radio" name="sexo" value="X"> X</label>
+                            </div>
+                        </td>
+                        <td style="width: 20%;"><span class="label">Nacionalidad</span><input type="text" name="nacionalidad" class="fill-input"></td>
+                        <td style="width: 20%;"><span class="label">Ocupación</span><input type="text" name="ocupacion" class="fill-input"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><span class="label">Domicilio (Calle, Nro, Piso, Depto)</span><input type="text" name="domicilio" class="fill-input"></td>
+                        <td><span class="label">Localidad</span><input type="text" name="localidad" class="fill-input"></td>
+                        <td colspan="2"><span class="label">Teléfono / Celular</span><input type="text" name="telefono" class="fill-input" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><span class="label">E-mail (Correo Electrónico)</span><input type="email" name="email" class="fill-input" required></td>
+                    </tr>
+                </table>
+                
+                <div class="consent-mini">
+                    <strong>Consentimiento Informado y Acuerdo Financiero:</strong> Consiento voluntariamente los tratamientos odontológicos administrados por <strong>United Dental</strong> según Ley 26.529. Declaro haber sido informado de sus fines y riesgos. Asimismo, ratifico que la clínica brinda exclusivamente <strong>atención particular libre de obras sociales/prepagas</strong>, asumiendo la total obligación de pago de los honorarios derivados bajo las modalidades comerciales aceptadas.
+                </div>
+                
+                <table class="sig-table">
+                    <tr>
+                        <td class="sig-box">FIRMA DEL PACIENTE / TUTOR LEGAL</td>
+                        <td style="width: 10%;"></td>
+                        <td class="sig-box">ACLARACIÓN Y DNI</td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+
     <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzVFz1xrD_nW8FlxJD9HfGbLpK2ZUmF6U7ndGvsdKU-T2rKmtI9Iuu8LEDXQMnS8sSX/exec";
+
         function calculateAge() {
             const birthdateInput = document.getElementById('birthdate').value;
             const ageInput = document.getElementById('age');
-            
-            if (!birthdateInput) {
-                ageInput.value = '';
-                return;
-            }
-            
+            if (!birthdateInput) { ageInput.value = ''; return; }
             const birthDate = new Date(birthdateInput);
             const today = new Date();
-            
             let age = today.getFullYear() - birthDate.getFullYear();
             const monthDiff = today.getMonth() - birthDate.getMonth();
-            
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
-            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) { age--; }
             ageInput.value = age >= 0 ? age + ' años' : '0 años';
+        }
+
+        function sendData() {
+            const form = document.getElementById('hcForm');
+            if(!form.checkValidity()) {
+                alert("Por favor, complete todos los campos requeridos antes de enviar.");
+                form.reportValidity();
+                return;
+            }
+
+            const formData = new FormData(form);
+            const urlParams = new URLSearchParams(formData).toString();
+
+            alert("Enviando datos... Por favor espere el mensaje de confirmación.");
+
+            fetch(`${WEB_APP_URL}?${urlParams}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if(data.result === 'success') {
+                    alert('¡Datos guardados con éxito en la base de datos de United Dental!');
+                } else {
+                    alert('Hubo un error al guardar: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Registro procesado. Verifique su hoja de cálculo en unos instantes.');
+            });
         }
     </script>
 </body>
