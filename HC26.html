@@ -117,12 +117,6 @@
             outline: none;
             padding: 2px 0;
         }
-        select.fill-input {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            cursor: pointer;
-        }
         .fill-textarea {
             resize: none;
             height: 50px;
@@ -163,7 +157,7 @@
             border-radius: 4px;
         }
 
-        /* Módulo de Firma Digital */
+        /* Módulo de Firma Digital Responsivo */
         .dso-signature-box {
             background: #fffde7;
             border: 1px dashed #fbc02d;
@@ -193,7 +187,7 @@
             gap: 8px;
         }
 
-        /* Botones en la parte inferior derecha */
+        /* Botones de acción */
         .form-actions {
             display: flex;
             justify-content: flex-end;
@@ -218,6 +212,24 @@
         }
         .action-btn:hover { opacity: 0.9; }
         .send-btn { background-color: var(--accent-color); }
+        
+        /* Botón WhatsApp Oculto Inicialmente */
+        .whatsapp-btn {
+            display: none;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            font-size: 11pt;
+            font-weight: bold;
+            border-radius: 6px;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .whatsapp-btn:hover { background-color: #128c7e; }
         
         .iti { width: 100%; }
 
@@ -264,7 +276,7 @@
                 margin: 0; 
                 font-size: 10pt; 
             }
-            .form-actions { display: none !important; }
+            .form-actions, .whatsapp-btn { display: none !important; }
             .page { 
                 max-width: 100%; 
                 width: 100%;
@@ -338,124 +350,28 @@
                     </div>
                     <div class="form-cell c-4">
                         <span class="label">Nacionalidad</span>
-                        <select name="nacionalidad" class="fill-input" required>
-                            <option value="" disabled selected>Seleccione...</option>
-                            <option value="Argentina">Argentina</option>
-                            <option value="Uruguay">Uruguay</option>
-                            <option value="Chile">Chile</option>
-                            <option value="Brasil">Brasil</option>
-                            <option value="Paraguay">Paraguay</option>
-                            <option value="Bolivia">Bolivia</option>
-                            <option value="Peru">Perú</option>
-                            <option value="Colombia">Colombia</option>
-                            <option value="Venezuela">Venezuela</option>
-                            <option value="Espana">España</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                    </div>
-                    <div class="form-cell c-4"><span class="label">Ocupación</span><input type="text" name="ocupacion" class="fill-input"></div>
-                    
-                    <div class="form-cell c-10"><span class="label">Domicilio (Calle, Nro, Piso, Depto)</span><input type="text" name="domicilio" class="fill-input"></div>
-                    <div class="form-cell c-4"><span class="label">Localidad</span><input type="text" name="localidad" class="fill-input"></div>
-                    <div class="form-cell c-6">
-                        <span class="label">Telefono</span>
-                        <input type="tel" id="phone" class="fill-input" required>
-                        <input type="hidden" name="telefono" id="hidden_phone">
-                    </div>
-                    
-                    <div class="form-cell c-20"><span class="label">E-mail (Correo Electrónico)</span><input type="email" name="email" class="fill-input" required></div>
-                    
-                    <div class="form-cell c-20" style="min-height: 85px;">
-                        <span class="label">Principal Motivo de la Consulta / Sintomatología</span>
-                        <textarea name="motivo_consulta" class="fill-textarea" placeholder="Describa brevemente el malestar, dolor o tratamiento solicitado..." required></textarea>
-                    </div>
-                </div>
-                
-                <div class="consent-mini">
-                    <strong>Consentimiento Informado y Acuerdo Financiero:</strong> Consiento voluntariamente los tratamientos odontológicos administrados por <strong>United Dental</strong> según Ley 26.529. Declaro haber sido informado de sus fines y riesgos. Asimismo, ratifico que la clínica brinda exclusivamente <strong>atención particular libre de obras sociales/prepagas</strong>, asumiendo la total obligación de pago de los honorarios derivados bajo las modalidades comerciales aceptadas.
-                </div>
-                
-                <div class="dso-signature-box">
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="legal_agree" name="firma_digital_check" value="ACEPTO" required>
-                        <span>Acepto los términos del consentimiento informado y firmo digitalmente este documento con carácter de Declaración Jurada.</span>
-                    </label>
-                    <div class="signature-input-group">
-                        <span class="label" style="margin: 0; white-space: nowrap;">Firma Electrónica (Escriba Nombre y Apellido completos):</span>
-                        <input type="text" name="firma_digital_nombre" class="fill-input" style="border-bottom: 1px solid #78909c; background: transparent; max-width: 350px;" placeholder="Nombre del firmante" required>
-                    </div>
-                </div>
+                        <input type="text" name="nacionalidad" list="paises-list" class="fill-input" placeholder="Escriba su país..." required>
+                        <datalist id="paises-list">
+                            <!-- Listado Global Autocompletable -->
+                            <option value="Afganistán"><option value="Albania"><option value="Alemania"><option value="Andorra"><option value="Angola"><option value="Antigua y Barbuda"><option value="Arabia Saudita"><option value="Argelia"><option value="Argentina"><option value="Armenia"><option value="Australia"><option value="Austria"><option value="Azerbaiyán"><option value="Bahamas"><option value="Bangladés"><option value="Barbados"><option value="Baréin"><option value="Bélgica"><option value="Belice"><option value="Benín"><option value="Bielorrusia"><option value="Birmania"><option value="Bolivia"><option value="Bosnia y Herzegovina"><option value="Botsuana"><option value="Brasil"><option value="Brunéi"><option value="Bulgaria"><option value="Burkina Faso"><option value="Burundi"><option value="¡Claro que sí! Vamos a solucionar esos tres puntos para que tu formulario web quede perfecto, sea totalmente responsivo en celulares y mejore la experiencia del usuario.
 
-                <!-- Botones al pie, alineados a la derecha -->
-                <div class="form-actions">
-                    <button type="button" class="action-btn" onclick="window.print()">Imprimir</button>
-                    <button type="button" class="action-btn send-btn" onclick="sendData()">Enviar</button>
-                </div>
-            </div>
-        </form>
-    </div>
+Aquí tienes las soluciones explicadas y el código listo para implementar.
 
-    <script>
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzVFz1xrD_nW8FlxJD9HfGbLpK2ZUmF6U7ndGvsdKU-T2rKmtI9Iuu8LEDXQMnS8sSX/exec";
+---
 
-        const phoneInput = document.querySelector("#phone");
-        const iti = window.intlTelInput(phoneInput, {
-            initialCountry: "ar",
-            preferredCountries: ["ar", "uy", "br", "us"],
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-        });
+## 1. Corrección del desborde: "Firma Electrónica..."
 
-        function calculateAge() {
-            const birthdateInput = document.getElementById('birthdate').value;
-            const ageInput = document.getElementById('age');
-            if (!birthdateInput) { ageInput.value = ''; return; }
-            const birthDate = new Date(birthdateInput);
-            const today = new Date();
-            let age = today.getFullYear() - birthDate.getFullYear();
-            const monthDiff = today.getMonth() - birthDate.getMonth();
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) { age--; }
-            ageInput.value = age >= 0 ? age + ' años' : '0 años';
-        }
+El texto largo se sale del marco en móviles porque, por defecto, los elementos intentan mantenerse en una sola línea. Para solucionarlo, usamos CSS para permitir que el texto se adapte al ancho de la pantalla y haga un salto de línea limpio.
 
-        function sendData() {
-            const form = document.getElementById('hcForm');
-            
-            if (!iti.isValidNumber()) {
-                alert("El número de teléfono no es válido o está incompleto para el país seleccionado.");
-                phoneInput.focus();
-                return;
-            }
-            
-            document.getElementById("hidden_phone").value = iti.getNumber();
-
-            if(!form.checkValidity()) {
-                alert("Por favor, complete todos los campos requeridos y acepte el cuadro de firma digital.");
-                form.reportValidity();
-                return;
-            }
-
-            const formData = new FormData(form);
-            const urlParams = new URLSearchParams(formData).toString();
-
-            alert("Sincronizando admisión con el servidor clínico... Por favor espere.");
-
-            fetch(`${WEB_APP_URL}?${urlParams}`, { method: 'POST' })
-            .then(response => response.json())
-            .then(data => {
-                if(data.result === 'success') {
-                    alert('¡Excelente! Datos de admisión y firma digital registrados exitosamente.');
-                } else {
-                    alert('Error en base de datos: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                alert('Registro procesado con éxito en el ecosistema digital de la clínica.');
-            });
-        }
-    </script>
-</body>
-</html>
-    </script>
-</body>
-</html>
+### El CSS que debes aplicar:
+```css
+.label-firma {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word; /* Fuerza el salto de línea si es necesario */
+    white-space: normal;   /* Permite que el texto ocupe varias líneas */
+    font-size: 14px;       /* Un tamaño cómodo para móviles */
+    margin-bottom: 8px;
+}
