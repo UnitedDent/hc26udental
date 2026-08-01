@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UDental</title>
     
-    <!-- Vinculación del Logo en la Pestaña (.jpg) -->
-<link rel="apple-touch-icon" sizes="180x180" href="logo.png?v=4">
-<link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=4">
-<link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=4">
-<link rel="shortcut icon" href="logo.png?v=4">
+    <!-- Configuración definitiva de Favicon para todos los navegadores (.png) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="logo.png?v=99">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=99">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=99">
+    <link rel="shortcut icon" type="image/png" href="logo.png?v=99">
     
     <!-- Librería internacional para selector de países en teléfono (Estilo Google) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
@@ -56,7 +56,7 @@
             background-color: #ffffff;
         }
         
-        /* Cabecera Responsiva con línea 3 veces más gruesa (6px en lugar de 2px) */
+        /* Cabecera Responsiva con línea 3 veces más gruesa */
         .header-dso {
             display: flex;
             flex-direction: column;
@@ -66,7 +66,7 @@
             gap: 10px;
         }
         
-        /* Título con la tipografía Arial Black solicitada */
+        /* Título con la tipografía Arial Black */
         .clinic-title-large {
             font-family: 'Arial Black', Gadget, sans-serif;
             font-size: 26pt;
@@ -91,7 +91,7 @@
             letter-spacing: 0.5px;
         }
         
-        /* Grid de Formulario Móvil por Defecto */
+        /* Grid de Formulario */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -168,7 +168,7 @@
             border-radius: 4px;
         }
 
-        /* Módulo de Firma Digital Adaptado a Móviles */
+        /* Módulo de Firma Digital */
         .dso-signature-box {
             background: #fffde7;
             border: 1px dashed #fbc02d;
@@ -231,7 +231,7 @@
         .action-btn:hover { opacity: 0.9; }
         .send-btn { background-color: var(--accent-color); }
         
-        /* Pantalla de éxito en caso de fallback */
+        /* Pantalla de éxito */
         .success-overlay {
             display: none;
             text-align: center;
@@ -393,8 +393,9 @@
                         </div>
                     </div>
                     
+                    <!-- CLAUSULA ACTUALIZADA -->
                     <div class="consent-mini">
-                        <strong>Consentimiento Informado y Acuerdo Financiero:</strong> Consiento voluntariamente los tratamientos odontológicos administrados por <strong>United Dental</strong> según Ley 26.529. Declaro haber sido informado de sus fines y riesgos. Asimismo, ratifico que la clínica brinda exclusivamente <strong>atención particular libre de obras sociales/prepagas</strong>, asumiendo la total obligación de pago de los honorarios derivados bajo las modalidades comerciales aceptadas.
+                        <strong>Consentimiento Informado y Acuerdo Financiero:</strong> Consiento los tratamientos e imágenes en United Dental (Ley 26.529) y ratifico que la atención es exclusivamente particular. Acepto que cualquier bonificación o gratuidad sobre la consulta o los estudios de diagnóstico por imágenes es de carácter promocional y condicionada a realizar mi tratamiento en este centro. En caso de solicitar el retiro, copia o envío de cualquier archivo digitalizado para uso externo o interconsulta, me comprometo a abonar el valor técnico de lista vigente de dicho estudio.
                     </div>
                     
                     <div class="dso-signature-box">
@@ -427,9 +428,7 @@
 
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzVFz1xrD_nW8FlxJD9HfGbLpK2ZUmF6U7ndGvsdKU-T2rKmtI9Iuu8LEDXQMnS8sSX/exec";
-        
-        // Link de redirección con el texto autocompletado en la URL
-        const WHATSAPP_REDIRECT_URL = "https://wa.me/5491122558962?text=%C2%A1Listo%21%20Ya%20complet%C3%A9%20y%20firm%C3%A9%20mi%20historia%20cl%C3%ADnica%20digital%20de%20United%20Dental.";
+        const WHATSAPP_REDIRECT_URL = "https://wa.me/5491122558962?text=%C2%A1Hola%21%20Ya%20complet%C3%A9%20y%20firm%C3%A9%20mi%20historia%20cl%C3%ADnica%20digital%20de%20United%20Dental.";
 
         const phoneInput = document.querySelector("#phone");
         const iti = window.intlTelInput(phoneInput, {
@@ -476,24 +475,21 @@
 
             alert("Sincronizando admisión con el servidor clínico... Al finalizar irás directamente a WhatsApp.");
 
-            // Configurar enlace de respaldo por si acaso
             document.getElementById('fallbackWaLink').href = WHATSAPP_REDIRECT_URL;
 
             fetch(`${WEB_APP_URL}?${urlParams}`, { method: 'POST' })
             .then(response => {
-                // Redirección inmediata tras respuesta del backend
                 redirectToWhatsApp();
             })
             .catch(error => {
                 console.error(error);
-                // Si hay error de CORS o red, redirige igual para no trabar al paciente
                 redirectToWhatsApp();
-                
-                // Muestra la pantalla de respaldo por si el navegador bloquea la redirección directa
                 document.getElementById('formContainer').style.display = 'none';
                 document.getElementById('successScreen').style.display = 'block';
             });
         }
     </script>
+</body>
+</html>
 </body>
 </html>
