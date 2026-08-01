@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UDental</title>
     
-    <!-- LÍNEA CORREGIDA PARA TU IMAGEN .JPG -->
+    <!-- Vinculación del Logo en la Pestaña (.jpg) -->
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     
-    <!-- Librería internacional para selector de países en teléfono... -->
+    <!-- Librería internacional para selector de países en teléfono (Estilo Google) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <style>
@@ -53,19 +53,22 @@
             background-color: #ffffff;
         }
         
-        /* Cabecera Responsiva */
+        /* Cabecera Responsiva con línea 3 veces más gruesa (6px en lugar de 2px) */
         .header-dso {
             display: flex;
             flex-direction: column;
-            border-bottom: 2px solid var(--accent-color);
+            border-bottom: 6px solid var(--accent-color);
             padding-bottom: 12px;
             margin-bottom: 20px;
             gap: 10px;
         }
+        
+        /* Título con la tipografía Arial Black solicitada */
         .clinic-title-large {
+            font-family: 'Arial Black', Gadget, sans-serif;
             font-size: 26pt;
             font-weight: 900;
-            letter-spacing: 1.5px;
+            letter-spacing: 0.5px;
             color: var(--primary-color);
             text-align: center;
         }
@@ -225,7 +228,7 @@
         .action-btn:hover { opacity: 0.9; }
         .send-btn { background-color: var(--accent-color); }
         
-        /* Contenedor de Éxito Post-Envío */
+        /* Pantalla de éxito en caso de fallback */
         .success-overlay {
             display: none;
             text-align: center;
@@ -241,24 +244,6 @@
             font-size: 12pt;
             margin-bottom: 30px;
             color: var(--text-color);
-        }
-        .btn-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #25D366;
-            color: white;
-            padding: 14px 28px;
-            font-size: 11pt;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: transform 0.2s, background-color 0.2s;
-        }
-        .btn-whatsapp:hover {
-            background-color: #128C7E;
-            transform: scale(1.03);
         }
         
         .iti { width: 100%; }
@@ -294,7 +279,7 @@
             }
         }
 
-        /* ESTILOS DE IMPRESIÓN EXCLUSIVOS: BLINDAJE EN HOJA A4 ÚNICA */
+        /* Estilos de Impresión */
         @media print {
             @page {
                 size: A4;
@@ -339,7 +324,7 @@
             .fill-textarea { height: 40px; }
             .dso-signature-box { background: transparent; border: 1px solid var(--border-color); }
             
-            .header-dso { display: flex !important; flex-direction: row !important; justify-content: space-between !important; }
+            .header-dso { display: flex !important; flex-direction: row !important; justify-content: space-between !important; border-bottom: 6px solid var(--accent-color) !important;}
             .clinic-title-large { text-align: left !important; }
             .clinic-info { text-align: right !important; }
             .signature-input-group { display: flex !important; flex-direction: row !important; }
@@ -415,12 +400,12 @@
                             <span>Acepto los términos del consentimiento informado y firmo digitalmente este documento con carácter de Declaración Jurada.</span>
                         </label>
                         <div class="signature-input-group">
-                            <span class="label" style="margin: 0; white-space: nowrap;">Firma Electrónica (Escriba Nombre y Apellido completos):</span>
+                            <span class="label" style="margin: 0;">Firma Electrónica (Escriba Nombre y Apellido completos):</span>
                             <input type="text" name="firma_digital_nombre" class="fill-input" style="border-bottom: 1px solid #78909c; background: transparent; max-width: 350px;" placeholder="Nombre del firmante" required>
                         </div>
                     </div>
 
-                    <!-- Botones al pie alineados a la derecha -->
+                    <!-- Botones -->
                     <div class="form-actions">
                         <button type="button" class="action-btn" onclick="window.print()">Imprimir</button>
                         <button type="button" class="action-btn send-btn" onclick="sendData()">Enviar</button>
@@ -429,16 +414,19 @@
             </form>
         </div>
 
-        <!-- Pantalla de éxito oculta por defecto -->
+        <!-- Pantalla de redirección fallback -->
         <div id="successScreen" class="success-overlay">
-            <div class="success-title">¡Admisión Recibida!</div>
-            <p class="success-text">La firma de la declaración jurada e historial clínico se han procesado de manera conforme.</p>
-            <a href="https://wa.me/5491122558962" class="btn-whatsapp">Volver a WhatsApp</a>
+            <div class="success-title">¡Redirigiendo a WhatsApp!</div>
+            <p class="success-text">Si la aplicación no se abre automáticamente, haz clic en el botón inferior.</p>
+            <a id="fallbackWaLink" href="#" class="action-btn send-btn" style="background-color: #25D366; text-decoration: none; display: inline-flex;">Abrir WhatsApp Manualmente</a>
         </div>
     </div>
 
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzVFz1xrD_nW8FlxJD9HfGbLpK2ZUmF6U7ndGvsdKU-T2rKmtI9Iuu8LEDXQMnS8sSX/exec";
+        
+        // Link de redirección con el texto autocompletado en la URL
+        const WHATSAPP_REDIRECT_URL = "https://wa.me/5491122558962?text=%C2%A1Listo%21%20Ya%20complet%C3%A9%20y%20firm%C3%A9%20mi%20historia%20cl%C3%ADnica%20digital%20de%20United%20Dental.";
 
         const phoneInput = document.querySelector("#phone");
         const iti = window.intlTelInput(phoneInput, {
@@ -457,6 +445,10 @@
             const monthDiff = today.getMonth() - birthDate.getMonth();
             if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) { age--; }
             ageInput.value = age >= 0 ? age + ' años' : '0 años';
+        }
+
+        function redirectToWhatsApp() {
+            window.location.href = WHATSAPP_REDIRECT_URL;
         }
 
         function sendData() {
@@ -479,18 +471,22 @@
             const formData = new FormData(form);
             const urlParams = new URLSearchParams(formData).toString();
 
-            alert("Sincronizando admisión con el servidor clínico... Por favor espere.");
+            alert("Sincronizando admisión con el servidor clínico... Al finalizar irás directamente a WhatsApp.");
+
+            // Configurar enlace de respaldo por si acaso
+            document.getElementById('fallbackWaLink').href = WHATSAPP_REDIRECT_URL;
 
             fetch(`${WEB_APP_URL}?${urlParams}`, { method: 'POST' })
-            .then(response => response.json())
-            .then(data => {
-                // Alternar contenedores visuales al completarse
-                document.getElementById('formContainer').style.display = 'none';
-                document.getElementById('successScreen').style.display = 'block';
+            .then(response => {
+                // Redirección inmediata tras respuesta del backend
+                redirectToWhatsApp();
             })
             .catch(error => {
                 console.error(error);
-                // Si la red bloquea CORS, forzar paso visual de éxito preventivo
+                // Si hay error de CORS o red, redirige igual para no trabar al paciente
+                redirectToWhatsApp();
+                
+                // Muestra la pantalla de respaldo por si el navegador bloquea la redirección directa
                 document.getElementById('formContainer').style.display = 'none';
                 document.getElementById('successScreen').style.display = 'block';
             });
