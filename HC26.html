@@ -6,7 +6,14 @@
     <title>UDental</title>
     
     <!-- Vinculación del Logo en la Pestaña (.jpg) -->
-    <link rel="icon" type="image/jpeg" href="logo.jpg?v=1">
+    <!-- Para Chrome, Brave y Edge (forzando actualización con versión) -->
+<link rel="icon" type="image/jpeg" href="logo.jpg?v=2">
+
+<!-- Para Safari (que prefiere enlaces absolutos explícitos) -->
+<link rel="apple-touch-icon" href="logo.jpg?v=2">
+
+<!-- Atajo genérico que Edge suele respetar mejor -->
+<link rel="shortcut icon" type="image/x-icon" href="logo.jpg?v=2">
     
     <!-- Librería internacional para selector de países en teléfono (Estilo Google) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
