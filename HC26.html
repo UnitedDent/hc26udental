@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UDental</title>
-    <!-- Librería internacional para selector de países en teléfono -->
+    <!-- Librería internacional para selector de países en teléfono (Estilo Google) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <style>
@@ -53,12 +53,13 @@
         .header-dso {
             display: flex;
             flex-direction: column;
-            border-bottom: 2px solid var(--accent-color);
+            border-bottom: 6px solid var(--accent-color);
             padding-bottom: 12px;
             margin-bottom: 20px;
             gap: 10px;
         }
         .clinic-title-large {
+            font-family: 'Arial Black', Arial, sans-serif;
             font-size: 26pt;
             font-weight: 900;
             letter-spacing: 1.5px;
@@ -74,11 +75,11 @@
         .title-banner {
             text-align: center;
             color: var(--primary-color);
-            font-size: 13pt;
+            font-size: 15pt;
             margin: 10px 0 20px 0;
             text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 0.5px;
+            font-weight: 900;
+            letter-spacing: 0.8px;
         }
         
         /* Grid de Formulario Móvil por Defecto */
@@ -225,17 +226,18 @@
         .success-overlay {
             display: none;
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 15px;
         }
+        /* Título en Rojo */
         .success-title {
-            color: #2e7d32;
-            font-size: 20pt;
+            color: var(--accent-color);
+            font-size: 22pt;
             font-weight: bold;
             margin-bottom: 15px;
         }
         .success-text {
             font-size: 12pt;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             color: var(--text-color);
         }
         .btn-whatsapp {
@@ -251,10 +253,26 @@
             border-radius: 30px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             transition: transform 0.2s, background-color 0.2s;
+            margin-bottom: 25px;
         }
         .btn-whatsapp:hover {
             background-color: #128C7E;
             transform: scale(1.03);
+        }
+
+        /* Imagen Informativa UDInfo.png */
+        .info-image-container {
+            margin-top: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .info-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
         }
         
         .iti { width: 100%; }
@@ -283,6 +301,7 @@
             .c-7  { grid-column: span 7; }
             .c-8  { grid-column: span 8; }
             .c-10 { grid-column: span 10; }
+            .c-12 { grid-column: span 12; }
             .c-20 { grid-column: span 20; }
             
             .signature-input-group {
@@ -326,6 +345,7 @@
             .c-7  { grid-column: span 7 !important; } 
             .c-8  { grid-column: span 8 !important; } 
             .c-10 { grid-column: span 10 !important; } 
+            .c-12 { grid-column: span 12 !important; }
             .c-20 { grid-column: span 20 !important; }
             
             .form-cell { 
@@ -361,7 +381,7 @@
                         </div>
                     </div>
                     
-                    <div class="title-banner">Historia Clínica</div>
+                    <div class="title-banner">Admisión - Historia Clínica</div>
                     
                     <div class="form-grid">
                         <div class="form-cell c-8"><span class="label">Apellidos</span><input type="text" name="apellidos" class="fill-input" required></div>
@@ -391,10 +411,10 @@
                         <div class="form-cell c-8"><span class="label">Domicilio (Calle, Nro, Piso, Depto)</span><input type="text" name="domicilio" class="fill-input" required></div>
                         <div class="form-cell c-5"><span class="label">Localidad</span><input type="text" name="localidad" class="fill-input" required></div>
                         <div class="form-cell c-4"><span class="label">Provincia</span><input type="text" name="provincia" class="fill-input" value="Buenos Aires" required></div>
-                        <div class="form-cell c-3"><span class="label">Cód. Postal</span><input type="text" name="cp" class="fill-input" placeholder="Ej: B7167"></div>
+                        <div class="form-cell c-3"><span class="label">Código Postal</span><input type="text" name="cp" class="fill-input" placeholder="Ej: B7167"></div>
                         
                         <div class="form-cell c-8">
-                            <span class="label">Teléfono (WhatsApp)</span>
+                            <span class="label">Telefono</span>
                             <input type="tel" id="phone" class="fill-input" required>
                             <input type="hidden" name="telefono" id="hidden_phone">
                         </div>
@@ -430,11 +450,16 @@
             </form>
         </div>
 
-        <!-- Pantalla de éxito oculta por defecto -->
+        <!-- Pantalla de éxito post-envío -->
         <div id="successScreen" class="success-overlay">
             <div class="success-title">¡Admisión Recibida!</div>
             <p class="success-text">La firma de la declaración jurada e historial clínico se han procesado de manera conforme.</p>
             <a href="https://wa.me/5491122558962" class="btn-whatsapp">Volver a WhatsApp</a>
+            
+            <!-- Imagen Informativa de GitHub -->
+            <div class="info-image-container">
+                <img src="UDInfo.png" alt="Información UDental">
+            </div>
         </div>
     </div>
 
@@ -485,13 +510,11 @@
             fetch(`${WEB_APP_URL}?${urlParams}`, { method: 'POST' })
             .then(response => response.json())
             .then(data => {
-                // Alternar contenedores visuales al completarse
                 document.getElementById('formContainer').style.display = 'none';
                 document.getElementById('successScreen').style.display = 'block';
             })
             .catch(error => {
                 console.error(error);
-                // Si la red bloquea CORS, forzar paso visual de éxito preventivo
                 document.getElementById('formContainer').style.display = 'none';
                 document.getElementById('successScreen').style.display = 'block';
             });
