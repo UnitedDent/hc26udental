@@ -3,522 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UDental</title>
-    <!-- Librería internacional para selector de países en teléfono (Estilo Google) -->
+    <title>Ficha de Admisión - United Dental</title>
+    <!-- CSS de Intl-Tel-Input para formatear teléfonos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <style>
         :root {
             --primary-color: #1a237e;
             --accent-color: #b71c1c;
-            --text-color: #2c3e50;
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
             --border-color: #cfd8dc;
-            --bg-input: #f8f9fa;
         }
-        
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-        
+
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: var(--text-color);
-            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
             margin: 0;
-            padding: 10px;
-            font-size: 11pt;
+            padding: 20px 10px;
+            color: #2c3e50;
         }
 
-        /* Contenedor Fluido de Ficha en Pantalla */
-        .page {
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto 20px auto;
-            background: #ffffff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: var(--card-bg);
             border-radius: 8px;
-            padding: 15px;
-            position: relative;
-        }
-
-        .patient-block {
-            width: 100%;
             border: 2px solid var(--primary-color);
-            border-radius: 8px;
-            padding: 15px;
-            background-color: #ffffff;
-        }
-        
-        /* Cabecera Responsiva */
-        .header-dso {
-            display: flex;
-            flex-direction: column;
-            border-bottom: 6px solid var(--accent-color);
-            padding-bottom: 12px;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .clinic-title-large {
-            font-family: 'Arial Black', Arial, sans-serif;
-            font-size: 26pt;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            color: var(--primary-color);
-            text-align: center;
-        }
-        .clinic-info {
-            text-align: center;
-            font-size: 9.5pt;
-            color: var(--primary-color);
-            line-height: 1.4;
-        }
-        .title-banner {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: 15pt;
-            margin: 10px 0 20px 0;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: 0.8px;
-        }
-        
-        /* Grid de Formulario Móvil por Defecto */
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1px;
-            background-color: var(--border-color);
-            border: 1px solid var(--border-color);
-            margin-bottom: 20px;
-            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        .form-cell {
-            padding: 8px 12px;
-            background-color: var(--bg-input);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 60px;
-        }
-        .label {
-            font-size: 8pt;
-            font-weight: bold;
-            color: #546e7a;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-        }
-        
-        .fill-input, .fill-textarea {
-            width: 100%;
-            border: none;
-            background: transparent;
-            font-size: 11pt;
-            color: #000000;
-            font-family: inherit;
-            outline: none;
-            padding: 2px 0;
-        }
-        .fill-textarea {
-            resize: none;
-            height: 50px;
-        }
-        
-        .sex-options {
-            display: flex;
-            gap: 15px;
-            margin-top: 2px;
-        }
-        .sex-label {
-            display: flex;
-            align-items: center;
-            font-size: 10.5pt;
-            cursor: pointer;
-            color: #000000;
-        }
-        .sex-label input {
-            margin-right: 5px;
-            width: 16px;
-            height: 16px;
-            accent-color: var(--primary-color);
-        }
-        
-        .form-cell:focus-within {
-            background-color: #ffffff;
-            box-shadow: inset 0 0 0 1px var(--primary-color);
-        }
-        
-        .consent-mini {
-            font-size: 9pt;
-            text-align: justify;
-            line-height: 1.45;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            background-color: #f8f9fa;
-            margin-bottom: 20px;
-            border-radius: 4px;
+
+        .header {
+            text-align: center;
+            padding: 25px 20px;
+            border-bottom: 6px solid var(--accent-color);
         }
 
-        /* Módulo de Firma Digital Adaptado a Móviles */
-        .dso-signature-box {
-            background: #fffde7;
-            border: 1px dashed #fbc02d;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 15px;
+        .header h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 28pt;
+            font-family: 'Arial Black', Gadget, sans-serif;
+            letter-spacing: 1px;
         }
-        .checkbox-container {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            cursor: pointer;
-            font-size: 9.5pt;
-            font-weight: bold;
-        }
-        .checkbox-container input {
-            width: 18px;
-            height: 18px;
-            margin-top: 2px;
-            flex-shrink: 0;
-            accent-color: #2e7d32;
-        }
-        
-        .signature-input-group {
-            margin-top: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            width: 100%;
-        }
-        .signature-input-group .label {
-            white-space: normal !important;
-            word-wrap: break-word;
+
+        .header p {
+            color: var(--primary-color);
+            font-size: 10pt;
+            margin: 5px 0 0 0;
             line-height: 1.4;
         }
 
-        /* Botones al pie */
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
+        .title-bar {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
         }
-        .action-btn {
+
+        .title-bar h2 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 14pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        form {
+            padding: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 9.5pt;
+            color: #455a64;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        input, select, textarea {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 10pt;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 4px rgba(26, 35, 126, 0.3);
+        }
+
+        .motivo-highlight {
+            background-color: #e8eaf6;
+            border-left: 6px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .signature-box {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        .signature-box label {
+            text-transform: none;
+            font-weight: normal;
+            font-size: 9.5pt;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .signature-box input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .btn-submit {
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 10px 22px;
-            font-size: 10pt;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .action-btn:hover { opacity: 0.9; }
-        .send-btn { background-color: var(--accent-color); }
-        
-        /* Contenedor de Éxito Post-Envío */
-        .success-overlay {
-            display: none;
-            text-align: center;
-            padding: 30px 15px;
-        }
-        /* Título en Rojo */
-        .success-title {
-            color: var(--accent-color);
-            font-size: 22pt;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .success-text {
-            font-size: 12pt;
-            margin-bottom: 25px;
-            color: var(--text-color);
-        }
-        .btn-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #25D366;
-            color: white;
-            padding: 14px 28px;
+            padding: 14px 20px;
             font-size: 11pt;
             font-weight: bold;
-            text-decoration: none;
-            border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: transform 0.2s, background-color 0.2s;
-            margin-bottom: 25px;
-        }
-        .btn-whatsapp:hover {
-            background-color: #128C7E;
-            transform: scale(1.03);
+            text-transform: uppercase;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease;
         }
 
-        /* Imagen Informativa UDInfo.png */
-        .info-image-container {
-            margin-top: 15px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
+        .btn-submit:hover {
+            background-color: #0d47a1;
         }
-        .info-image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-color);
-        }
-        
+
         .iti { width: 100%; }
 
-        /* Media Query para Escritorios y Laptops */
-        @media (min-width: 768px) {
-            body { padding: 20px; }
-            .page { padding: 25px; }
-            .patient-block { padding: 20px; }
-            
-            .header-dso {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .clinic-title-large { text-align: left; }
-            .clinic-info { text-align: right; }
-
-            .form-grid {
-                grid-template-columns: repeat(20, 1fr);
-            }
-            .c-3  { grid-column: span 3; }
-            .c-4  { grid-column: span 4; }
-            .c-5  { grid-column: span 5; }
-            .c-6  { grid-column: span 6; }
-            .c-7  { grid-column: span 7; }
-            .c-8  { grid-column: span 8; }
-            .c-10 { grid-column: span 10; }
-            .c-12 { grid-column: span 12; }
-            .c-20 { grid-column: span 20; }
-            
-            .signature-input-group {
-                flex-direction: row;
-                align-items: center;
-            }
+        #successScreen {
+            display: none;
+            padding: 40px 20px;
+            text-align: center;
         }
 
-        /* ESTILOS DE IMPRESIÓN EXCLUSIVOS: BLINDAJE EN HOJA A4 ÚNICA */
-        @media print {
-            @page {
-                size: A4;
-                margin: 10mm 15mm;
-            }
-            body { 
-                background-color: #ffffff; 
-                padding: 0; 
-                margin: 0; 
-                font-size: 10pt; 
-            }
-            .form-actions { display: none !important; }
-            .page { 
-                max-width: 100%; 
-                width: 100%;
-                box-shadow: none; 
-                padding: 0; 
-                margin: 0;
-                background: white; 
-            }
-            
-            .form-grid { 
-                display: grid !important;
-                grid-template-columns: repeat(20, 1fr) !important; 
-                gap: 1px; 
-                background-color: var(--border-color); 
-            }
-            .c-3  { grid-column: span 3 !important; } 
-            .c-4  { grid-column: span 4 !important; } 
-            .c-5  { grid-column: span 5 !important; }
-            .c-6  { grid-column: span 6 !important; } 
-            .c-7  { grid-column: span 7 !important; } 
-            .c-8  { grid-column: span 8 !important; } 
-            .c-10 { grid-column: span 10 !important; } 
-            .c-12 { grid-column: span 12 !important; }
-            .c-20 { grid-column: span 20 !important; }
-            
-            .form-cell { 
-                background-color: transparent !important; 
-                min-height: 50px; 
-                padding: 6px 10px;
-            }
-            .fill-input { color: #000000 !important; }
-            .fill-textarea { height: 40px; }
-            .dso-signature-box { background: transparent; border: 1px solid var(--border-color); }
-            
-            .header-dso { display: flex !important; flex-direction: row !important; justify-content: space-between !important; }
-            .clinic-title-large { text-align: left !important; }
-            .clinic-info { text-align: right !important; }
-            .signature-input-group { display: flex !important; flex-direction: row !important; }
-            
-            input[type="date"]::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; }
+        #successScreen h3 {
+            color: var(--primary-color);
+            font-size: 18pt;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
         }
     </style>
 </head>
 <body>
 
-    <div class="page">
-        <!-- Bloque Principal de Formulario -->
-        <div id="formContainer">
-            <form id="hcForm">
-                <div class="patient-block">
-                    <div class="header-dso">
-                        <div class="clinic-title-large">United Dental</div>
-                        <div class="clinic-info">
-                            Jason 1091 Local 7, Pinamar, BA 7167 | Tel: 02254 48 1005<br>
-                            united.dental@email.com | <strong>Atención Exclusiva Particular</strong>
-                        </div>
-                    </div>
-                    
-                    <div class="title-banner">Admisión - Historia Clínica</div>
-                    
-                    <div class="form-grid">
-                        <div class="form-cell c-8"><span class="label">Apellidos</span><input type="text" name="apellidos" class="fill-input" required></div>
-                        <div class="form-cell c-8"><span class="label">Nombres</span><input type="text" name="nombres" class="fill-input" required></div>
-                        <div class="form-cell c-4"><span class="label">DNI / Pasaporte</span><input type="text" name="dni" class="fill-input" required></div>
-                        
-                        <div class="form-cell c-5"><span class="label">Fecha de Nac.</span><input type="date" id="birthdate" name="birthdate" class="fill-input" onchange="calculateAge()" required></div>
-                        <div class="form-cell c-3"><span class="label">Edad</span><input type="text" id="age" name="age" class="fill-input" readonly placeholder="Auto"></div>
-                        <div class="form-cell c-4">
-                            <span class="label">Sexo</span>
-                            <div class="sex-options">
-                                <label class="sex-label"><input type="radio" name="sexo" value="F" required> F</label>
-                                <label class="sex-label"><input type="radio" name="sexo" value="M"> M</label>
-                                <label class="sex-label"><input type="radio" name="sexo" value="X"> X</label>
-                            </div>
-                        </div>
-                        <div class="form-cell c-4">
-                            <span class="label">Nacionalidad</span>
-                            <input type="text" name="nacionalidad" class="fill-input" list="paises" placeholder="Escriba país..." autocomplete="off" required>
-                            <datalist id="paises">
-                                <option value="Argentina"><option value="Uruguay"><option value="Chile"><option value="Brasil"><option value="Paraguay"><option value="Bolivia"><option value="Perú"><option value="Colombia"><option value="Venezuela"><option value="Ecuador"><option value="Estados Unidos"><option value="España"><option value="México"><option value="Italia"><option value="Francia"><option value="Alemania"><option value="Reino Unido"><option value="Canadá"><option value="Portugal"><option value="Suiza"><option value="China"><option value="Japón"><option value="Australia"><option value="Costa Rica"><option value="Cuba"><option value="Guatemala"><option value="Honduras"><option value="Nicaragua"><option value="Panamá"><option value="Puerto Rico"><option value="República Dominicana"><option value="El Salvador">
-                            </datalist>
-                        </div>
-                        <div class="form-cell c-4"><span class="label">Ocupación</span><input type="text" name="ocupacion" class="fill-input"></div>
-                        
-                        <!-- Domicilio Estructurado para Google Contacts / Maps -->
-                        <div class="form-cell c-8"><span class="label">Domicilio (Calle, Nro, Piso, Depto)</span><input type="text" name="domicilio" class="fill-input" required></div>
-                        <div class="form-cell c-5"><span class="label">Localidad</span><input type="text" name="localidad" class="fill-input" required></div>
-                        <div class="form-cell c-4"><span class="label">Provincia</span><input type="text" name="provincia" class="fill-input" value="Buenos Aires" required></div>
-                        <div class="form-cell c-3"><span class="label">Código Postal</span><input type="text" name="cp" class="fill-input" placeholder="Ej: B7167"></div>
-                        
-                        <div class="form-cell c-8">
-                            <span class="label">Telefono</span>
-                            <input type="tel" id="phone" class="fill-input" required>
-                            <input type="hidden" name="telefono" id="hidden_phone">
-                        </div>
-                        <div class="form-cell c-12"><span class="label">E-mail (Correo Electrónico)</span><input type="email" name="email" class="fill-input" required></div>
-                        
-                        <div class="form-cell c-20" style="min-height: 85px;">
-                            <span class="label">Principal Motivo de la Consulta / Sintomatología</span>
-                            <textarea name="motivo_consulta" class="fill-textarea" placeholder="Describa brevemente el malestar, dolor o tratamiento solicitado..." required></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="consent-mini">
-                        <strong>Consentimiento Informado y Acuerdo Financiero:</strong> Consiento los tratamientos e imágenes en <strong>United Dental</strong> (Ley 26.529) y ratifico que la atención es exclusivamente particular. Acepto que cualquier bonificación o gratuidad sobre la consulta o los estudios de diagnóstico por imágenes es de carácter promocional y condicionada a realizar mi tratamiento en este centro. En caso de solicitar el retiro, copia o envío de cualquier archivo digitalizado para uso externo o interconsulta, me comprometo a abonar el valor técnico de lista vigente de dicho estudio.
-                    </div>
-                    
-                    <div class="dso-signature-box">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="legal_agree" name="firma_digital_check" value="ACEPTO" required>
-                            <span>Acepto los términos del consentimiento informado y firmo digitalmente este documento con carácter de Declaración Jurada.</span>
-                        </label>
-                        <div class="signature-input-group">
-                            <span class="label" style="margin: 0; white-space: nowrap;">Firma Electrónica (Escriba Nombre y Apellido completos):</span>
-                            <input type="text" name="firma_digital_nombre" class="fill-input" style="border-bottom: 1px solid #78909c; background: transparent; max-width: 350px;" placeholder="Nombre del firmante" required>
-                        </div>
-                    </div>
-
-                    <!-- Botones al pie alineados a la derecha -->
-                    <div class="form-actions">
-                        <button type="button" class="action-btn" onclick="window.print()">Imprimir</button>
-                        <button type="button" class="action-btn send-btn" onclick="sendData()">Enviar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Pantalla de éxito post-envío -->
-        <div id="successScreen" class="success-overlay">
-            <div class="success-title">¡Admisión Recibida!</div>
-            <p class="success-text">La firma de la declaración jurada e historial clínico se han procesado de manera conforme.</p>
-            <a href="https://wa.me/5491122558962" class="btn-whatsapp">Volver a WhatsApp</a>
-            
-            <!-- Imagen Informativa de GitHub -->
-            <div class="info-image-container">
-                <img src="UDInfo.png" alt="Información UDental">
-            </div>
-        </div>
+<div class="container">
+    <!-- Encabezado Institucional -->
+    <div class="header">
+        <h1>United Dental</h1>
+        <p>
+            Jason 1091 Local 7, Pinamar, BA 7167 | Tel: 02254 48 1005<br>
+            <strong>Atención Exclusiva Particular</strong>
+        </p>
     </div>
 
-    <script>
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwPZmfRbGmOmbIxqK5ujJHBvT2VhKRwwyie3Ax_O-iP5IFxh9k67qWHzoCOTUVY5sgz/exec";
+    <div class="title-bar">
+        <h2>Ficha de Admisión de Paciente</h2>
+    </div>
 
-        const phoneInput = document.querySelector("#phone");
-        const iti = window.intlTelInput(phoneInput, {
-            initialCountry: "ar",
-            preferredCountries: ["ar", "uy", "br", "us"],
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    <!-- Formulario -->
+    <div id="formContainer">
+        <form id="hcForm">
+            
+            <!-- Motivo de Consulta Destacado -->
+            <div class="motivo-highlight full-width">
+                <div class="form-group">
+                    <label for="motivo_consulta" style="color: var(--primary-color); font-size: 10pt;">🚨 Motivo de Consulta / Sintomatología Principal *</label>
+                    <textarea id="motivo_consulta" name="motivo_consulta" rows="3" placeholder="Describa brevemente el motivo de su visita o síntoma..." required></textarea>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="apellidos">Apellidos *</label>
+                    <input type="text" id="apellidos" name="apellidos" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombres">Nombres *</label>
+                    <input type="text" id="nombres" name="nombres" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dni">DNI / Pasaporte *</label>
+                    <input type="text" id="dni" name="dni" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthdate">Fecha de Nacimiento *</label>
+                    <input type="date" id="birthdate" name="birthdate" required onchange="calcularEdad()">
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Edad</label>
+                    <input type="text" id="age" name="age" readonly placeholder="Se calcula automáticamente">
+                </div>
+
+                <div class="form-group">
+                    <label for="sexo">Sexo *</label>
+                    <select id="sexo" name="sexo" required>
+                        <option value="">Seleccione...</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nacionalidad">Nacionalidad *</label>
+                    <input type="text" id="nacionalidad" name="nacionalidad" value="Argentina" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ocupacion">Ocupación</label>
+                    <input type="text" id="ocupacion" name="ocupacion">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="domicilio">Domicilio *</label>
+                    <input type="text" id="domicilio" name="domicilio" placeholder="Calle, número, piso/depto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="localidad">Localidad *</label>
+                    <input type="text" id="localidad" name="localidad" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="provincia">Provincia *</label>
+                    <input type="text" id="provincia" name="provincia" value="Buenos Aires" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cp">Código Postal</label>
+                    <input type="text" id="cp" name="cp">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono_input">Teléfono (WhatsApp) *</label>
+                    <input type="tel" id="telefono_input" required>
+                    <input type="hidden" id="telefono" name="telefono">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="email">Correo Electrónico *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+
+            <!-- Conformidad / Firma Digital -->
+            <div class="signature-box full-width">
+                <label>
+                    <input type="checkbox" id="check_firma" required>
+                    <span>Declaro que todos los datos consignados en esta ficha son exactos y verdaderos.</span>
+                </label>
+                <div class="form-group" style="margin-top: 10px;">
+                    <label for="firma_digital_nombre">Nombre Completo del Firmante (Firma Digital) *</label>
+                    <input type="text" id="firma_digital_nombre" name="firma_digital_nombre" placeholder="Escriba su Nombre y Apellido completo" required>
+                </div>
+            </div>
+
+            <button type="button" class="btn-submit" onclick="sendData()">Enviar Formulario de Admisión</button>
+        </form>
+    </div>
+
+    <!-- Pantalla de Confirmación -->
+    <div id="successScreen">
+        <h3 style="color: #2e7d32;">✔ ¡Admisión Registrada Exitosamente!</h3>
+        <p>Muchas gracias. Los datos de la admisión se guardaron correctamente y el equipo clínico de <strong>United Dental</strong> fue notificado.</p>
+    </div>
+</div>
+
+<!-- Scripts de Intl-Tel-Input -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script>
+    // URL de Web App integrada
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwPZmfRbGmOmbIxqK5ujJHBvT2VhKRwwyie3Ax_O-iP5IFxh9k67qWHzoCOTUVY5sgz/exec";
+
+    // Inicializar plugin de teléfono (predeterminado Argentina)
+    const phoneInput = document.querySelector("#telefono_input");
+    const iti = window.intlTelInput(phoneInput, {
+        initialCountry: "ar",
+        preferredCountries: ["ar", "uy", "br", "cl", "us"],
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+    });
+
+    // Calcular edad automática
+    function calcularEdad() {
+        const fechaNac = document.getElementById("birthdate").value;
+        if (!fechaNac) return;
+        const hoy = new Date();
+        const cumple = new Date(fechaNac);
+        let edad = hoy.getFullYear() - cumple.getFullYear();
+        const m = hoy.getMonth() - cumple.getMonth();
+        if (m < 0 || (m === 0 && hoy.getDate() < cumple.getDate())) {
+            edad--;
+        }
+        document.getElementById("age").value = edad > 0 ? edad + " años" : "0 años";
+    }
+
+    // Función de envío adaptada (Evita bloqueos CORS)
+    function sendData() {
+        const form = document.getElementById('hcForm');
+        
+        if (!iti.isValidNumber()) {
+            alert("El número de teléfono no es válido o está incompleto.");
+            phoneInput.focus();
+            return;
+        }
+        
+        // Asignar el teléfono formateado con código internacional al campo oculto
+        document.getElementById("telefono").value = iti.getNumber();
+
+        if (!form.checkValidity()) {
+            alert("Por favor, complete todos los campos requeridos y firme la declaración.");
+            form.reportValidity();
+            return;
+        }
+
+        const formData = new FormData(form);
+        const urlParams = new URLSearchParams(formData).toString();
+
+        alert("Sincronizando ficha de admisión con el sistema... Por favor espere.");
+
+        // Enviar petición POST/GET compatible a Google Apps Script
+        fetch(`${WEB_APP_URL}?${urlParams}`, { 
+            method: 'POST',
+            mode: 'no-cors' 
+        })
+        .then(() => {
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'block';
+        })
+        .catch(error => {
+            console.error("Error en la conexión:", error);
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'block';
         });
+    }
+</script>
 
-        function calculateAge() {
-            const birthdateInput = document.getElementById('birthdate').value;
-            const ageInput = document.getElementById('age');
-            if (!birthdateInput) { ageInput.value = ''; return; }
-            const birthDate = new Date(birthdateInput);
-            const today = new Date();
-            let age = today.getFullYear() - birthDate.getFullYear();
-            const monthDiff = today.getMonth() - birthDate.getMonth();
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) { age--; }
-            ageInput.value = age >= 0 ? age + ' años' : '0 años';
-        }
-
-        function sendData() {
-            const form = document.getElementById('hcForm');
-            
-            if (!iti.isValidNumber()) {
-                alert("El número de teléfono no es válido o está incompleto.");
-                phoneInput.focus();
-                return;
-            }
-            
-            document.getElementById("hidden_phone").value = iti.getNumber();
-
-            if(!form.checkValidity()) {
-                alert("Por favor, complete todos los campos requeridos y acepte el cuadro de firma digital.");
-                form.reportValidity();
-                return;
-            }
-
-            const formData = new FormData(form);
-            const urlParams = new URLSearchParams(formData).toString();
-
-            alert("Sincronizando admisión con el servidor clínico... Por favor espere.");
-
-            fetch(`${WEB_APP_URL}?${urlParams}`, { method: 'POST' })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('formContainer').style.display = 'none';
-                document.getElementById('successScreen').style.display = 'block';
-            })
-            .catch(error => {
-                console.error(error);
-                document.getElementById('formContainer').style.display = 'none';
-                document.getElementById('successScreen').style.display = 'block';
-            });
-        }
-    </script>
 </body>
 </html>
