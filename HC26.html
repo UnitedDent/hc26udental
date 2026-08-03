@@ -377,9 +377,25 @@
                         </div>
                         <div class="form-cell c-4"><span class="label">Ocupación</span><input type="text" name="ocupacion" class="fill-input"></div>
                         
-                        <div class="form-cell c-10"><span class="label">Domicilio (Calle, Nro, Piso, Depto)</span><input type="text" name="domicilio" class="fill-input"></div>
-                        <div class="form-cell c-4"><span class="label">Localidad</span><input type="text" name="localidad" class="fill-input"></div>
-                        <div class="form-cell c-6">
+                        <div class="form-group">
+  <label for="domicilio">Domicilio (Calle y Altura / Piso / Depto):</label>
+  <input type="text" id="domicilio" name="domicilio" placeholder="Ej: Av. Bunge 450 2A" required>
+</div>
+
+<div class="form-group">
+  <label for="localidad">Localidad / Ciudad:</label>
+  <input type="text" id="localidad" name="localidad" placeholder="Ej: Pinamar" required>
+</div>
+
+<div class="form-group">
+  <label for="provincia">Provincia:</label>
+  <input type="text" id="provincia" name="provincia" placeholder="Ej: Buenos Aires" value="Buenos Aires">
+</div>
+
+<div class="form-group">
+  <label for="cp">Código Postal:</label>
+  <input type="text" id="cp" name="cp" placeholder="Ej: B7167">
+</div>
                             <span class="label">Telefono</span>
                             <input type="tel" id="phone" class="fill-input" required>
                             <input type="hidden" name="telefono" id="hidden_phone">
